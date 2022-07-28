@@ -1,0 +1,8 @@
+Document link
+https://square.github.io/retrofit/
+
+Fake online Rest API
+https://jsonplaceholder.typicode.com/
+
+Rest API links
+https://jsonplaceholder.typicode.com/posts
