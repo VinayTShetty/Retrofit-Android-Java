@@ -5,6 +5,7 @@ import com.example.retrofit.PojoCreation.Comment;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface JsonPlaceHolderApi {
     /**
@@ -21,4 +22,15 @@ public interface JsonPlaceHolderApi {
      */
     @GET("posts/2/comments")
     Call<List<Comment>> getComments();
+
+    /**
+     *  Final URL for the Response
+     *  https://jsonplaceholder.typicode.com/posts/2/comments
+     *  Removing the HardCoding of the URL
+     *  Note:- posts/{id}/comments
+     *         @Path("id")
+     *         Here both id should be case sensitive
+     */
+    @GET("posts/{id}/comments")
+    Call<List<Comment>> getCommentsRemoveHardCodingURL(@Path("id") int postId);
 }

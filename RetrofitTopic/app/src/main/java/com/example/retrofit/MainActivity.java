@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void RetrofitCallFromURL(){
-      Call<List<Comment>> callresponse= jsonPlaceHolderApi.getComments();
+      Call<List<Comment>> callresponse= jsonPlaceHolderApi.getCommentsRemoveHardCodingURL(10);
       callresponse.enqueue(new Callback<List<Comment>>() {
           @Override
           public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
