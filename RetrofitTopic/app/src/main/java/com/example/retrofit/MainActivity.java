@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.retrofit.PojoCreation.Comment;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,15 +17,55 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private TextView responseTextview;
-
+    JsonPlaceHolderApi jsonPlaceHolderApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         responseTextview=(TextView)findViewById(R.id.responseTextview_id);
-        createRetrofitInstnace();
+        retrofitIntialization();
+      //createRetrofitInstnace();
+        RetrofitCallFromURL();
     }
 
+    private void retrofitIntialization(){
+        /**
+         * Document Explanation for the Steps why this process is required.
+         */
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
+    }
+
+    private void RetrofitCallFromURL(){
+      Call<List<Comment>> callresponse= jsonPlaceHolderApi.getComments();
+      callresponse.enqueue(new Callback<List<Comment>>() {
+          @Override
+          public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+              if(!response.isSuccessful()){
+                  responseTextview.setText(response.code());
+                  return;
+              }
+              List<Comment> comments=  response.body();
+              for(Comment comment:comments){
+                  String content="";
+                  content+="ID= "+comment.getId()+"\n";
+                  content+="Post ID= "+comment.getPostId()+"\n";
+                  content+="Name = "+comment.getName()+"\n";
+                  content+="Email = "+comment.getEmail()+"\n";
+                  content+="Text= "+comment.getText()+"\n"+"\n";
+                  responseTextview.append(content);
+              }
+          }
+
+          @Override
+          public void onFailure(Call<List<Comment>> call, Throwable t) {
+
+          }
+      });
+    }
     private void createRetrofitInstnace(){
         /**
          * Document Explanation for the Steps why this process is required.
@@ -45,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     responseTextview.setText(response.code());
                     return;
                 }
-              List<Post> posts=  response.body();
+                List<Post> posts=  response.body();
                 for(Post post:posts){
                     String content="";
                     content+="ID= "+post.getId()+"\n";
