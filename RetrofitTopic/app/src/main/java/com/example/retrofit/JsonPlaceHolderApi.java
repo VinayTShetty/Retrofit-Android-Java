@@ -42,4 +42,15 @@ public interface JsonPlaceHolderApi {
      */
     @GET("comments")
     Call<List<Comment>> getCommentsByQuerey(@Query("postId") int id_post);
+
+    /**
+     * Using muliple Querey
+     * https://jsonplaceholder.typicode.com/posts?userId=1&_sort=Id&_order=desc
+     */
+    @GET("posts")
+    Call<List<Post>> getPostByMulitpleQuerey(
+            @Query("userId") int id_user,
+            @Query("_sort") String SORT,
+            @Query("_order") int order
+    );
 }
