@@ -54,7 +54,7 @@ public interface JsonPlaceHolderApi {
     Call<List<Post>> getPostByMulitpleQuerey(
             @Query("userId") int id_user,
             @Query("_sort") String SORT,
-            @Query("_order") int order
+            @Query("_order") String order
     );
 
 
