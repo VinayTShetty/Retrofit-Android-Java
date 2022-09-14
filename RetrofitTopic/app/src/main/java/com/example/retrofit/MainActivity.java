@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Post>> call=jsonPlaceHolderApi.getPostByMulitpleQuerey(4,"id","desc");
+        Call<List<Post>> call=jsonPlaceHolderApi.getPostByMulitpleQuerey(4,null,null);
         /**
          * call.enqueue will by default run on the background Thread.
          */
