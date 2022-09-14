@@ -6,6 +6,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
     /**
@@ -33,4 +34,12 @@ public interface JsonPlaceHolderApi {
      */
     @GET("posts/{id}/comments")
     Call<List<Comment>> getCommentsRemoveHardCodingURL(@Path("id") int postId);
+
+    /**
+     * Using a querey method at the end point i.e by using symbol ?
+     * Example :-https://jsonplaceholder.typicode.com/comments?postId=10
+     * Retrofit will automatically will add ? before querey paramerter and = after parameter
+     */
+    @GET("comments")
+    Call<List<Comment>> getCommentsByQuerey(@Query("postId") int id_post);
 }
