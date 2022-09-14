@@ -31,6 +31,9 @@ public interface JsonPlaceHolderApi {
      *  Note:- posts/{id}/comments
      *         @Path("id")
      *         Here both id should be case sensitive
+     *
+     *  Note :- We can also add mulitple option like
+     *    @GET("posts/{id}/{x}/{y}/comments")
      */
     @GET("posts/{id}/comments")
     Call<List<Comment>> getCommentsRemoveHardCodingURL(@Path("id") int postId);
@@ -53,4 +56,6 @@ public interface JsonPlaceHolderApi {
             @Query("_sort") String SORT,
             @Query("_order") int order
     );
+
+
 }
