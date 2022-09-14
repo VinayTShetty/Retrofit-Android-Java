@@ -51,8 +51,9 @@ public interface JsonPlaceHolderApi {
      * https://jsonplaceholder.typicode.com/posts?userId=1&_sort=Id&_order=desc
      */
     @GET("posts")
-    Call<List<Post>> getPostByMulitpleQuerey(
+    Call<List<Post>> getPostByMulitpleQuereyforMultipleUsers(
             @Query("userId") int id_user,
+            @Query("userId") int id_user_1,
             @Query("_sort") String SORT,
             @Query("_order") String order
     );
