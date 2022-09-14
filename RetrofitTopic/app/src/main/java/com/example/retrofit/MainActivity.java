@@ -224,6 +224,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Notes on Passing the URL.
+     *
+     * Note 1:- We can pass the compelete url for the parameter including the base URL as below.
+     *          https://jsonplaceholder.typicode.com/posts/3/comments
+     *
+     *          It will overwrite the Base URL that s it.
+     *
+     * Note 2:- Base URL should always be closed with /
+     *  ex 1 :- https://jsonplaceholder.typicode.com/   --->Valid.
+     *  ex 2 :- https://jsonplaceholder.typicode.com/v3   --->InValid.(Crash might occur)
+     *
+     *
+     *  Note 3:- Remove the Traiilng / in the interface.
+     *  If we add the "/post" in the interface of the API It will remove the previous trailings.
+     *
+     *  Base URL= https://jsonplaceholder.typicode.com/v3
+     *  Pass parameter as "/posts"
+     *  Result = https://jsonplaceholder.typicode.com/posts
+     *
+     *   Base URL= https://jsonplaceholder.typicode.com/v3
+     *   Pass parameter as "posts"
+     *   Result = https://jsonplaceholder.typicode.com/v3/posts
+     */
     private void getRequestFromURL(){
         Call<List<Comment>> callresponse= jsonPlaceHolderApi.getCommentsByQuerey("posts/3/comments");
         callresponse.enqueue(new Callback<List<Comment>>() {
