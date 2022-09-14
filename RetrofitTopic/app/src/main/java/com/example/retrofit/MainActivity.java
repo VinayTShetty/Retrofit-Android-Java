@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         responseTextview=(TextView)findViewById(R.id.responseTextview_id);
         retrofitIntialization();
-        usingMapQuerey();
+        getRequestFromURL();
     }
 
     private void retrofitIntialization(){
@@ -222,5 +222,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getRequestFromURL(){
+        Call<List<Comment>> callresponse= jsonPlaceHolderApi.getCommentsByQuerey("posts/3/comments");
+        callresponse.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if(!response.isSuccessful()){
+                    responseTextview.setText(response.code());
+                    return;
+                }
+                List<Comment> comments=  response.body();
+                for(Comment comment:comments){
+                    String content="";
+                    content+="ID= "+comment.getId()+"\n";
+                    content+="Post ID= "+comment.getPostId()+"\n";
+                    content+="Name = "+comment.getName()+"\n";
+                    content+="Email = "+comment.getEmail()+"\n";
+                    content+="Text= "+comment.getText()+"\n"+"\n";
+                    responseTextview.append(content);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+
+            }
+        });
     }
 }

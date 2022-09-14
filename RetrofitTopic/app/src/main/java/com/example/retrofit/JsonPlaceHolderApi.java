@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface JsonPlaceHolderApi {
     /**
@@ -62,5 +63,11 @@ public interface JsonPlaceHolderApi {
 
     @GET("posts")
     Call<List<Post>> passQuereyDynamicallyUsingMap(@QueryMap Map<String,String> parameters);
+
+    /**
+     * Passing complete URL
+     */
+    @GET
+    Call<List<Comment>> getCommentsByQuerey(@Url String url);
 
 }
