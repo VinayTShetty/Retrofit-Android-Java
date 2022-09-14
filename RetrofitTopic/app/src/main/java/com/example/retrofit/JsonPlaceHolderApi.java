@@ -3,10 +3,13 @@ package com.example.retrofit;
 import com.example.retrofit.PojoCreation.Comment;
 
 import java.util.List;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface JsonPlaceHolderApi {
     /**
@@ -57,5 +60,7 @@ public interface JsonPlaceHolderApi {
             @Query("_order") String order
     );
 
+    @GET("posts")
+    Call<List<Post>> passQuereyDynamicallyUsingMap(@QueryMap Map<String,String> parameters);
 
 }
